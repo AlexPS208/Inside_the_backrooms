@@ -3,8 +3,11 @@ from math import tan, pi
 # game settings
 WIDTH = 1200
 HEIGHT = 800
+# recommended fps - 60 or 90
 FPS = 90
 TILE = 90
+# min - 2, recommended playable min - 16
+MAP_SIZE = 64
 
 # player settings
 player_settings = {
@@ -17,7 +20,7 @@ player_settings = {
 FOV = pi/3
 HALF_FOV = FOV/2
 NUM_RAYS = 1200
-MAX_DEPTH = 500
+MAX_DEPTH = 300
 DELTA_ANGLE = FOV/NUM_RAYS
 DIST = NUM_RAYS / (2 * tan(HALF_FOV))
 PROJ_COEF = 0.2 * DIST * TILE
