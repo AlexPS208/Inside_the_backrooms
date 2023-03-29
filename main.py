@@ -2,11 +2,18 @@ import pygame
 from settings import *
 from player import Player
 from drawing import Drawing
+
+# import for minimap
 import math
 from map import world_map
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+pygame.display.set_caption('Inside the Backrooms')
+icon = pygame.image.load('./src/icon.png')
+pygame.display.set_icon(icon)
+
 clock = pygame.time.Clock()
 render = Drawing(screen)
 
