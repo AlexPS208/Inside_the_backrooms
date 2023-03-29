@@ -6,12 +6,13 @@ HEIGHT = 800
 # recommended fps - 60 or 90
 FPS = 90
 TILE = 90
-# min - 2, recommended playable min - 16
-MAP_SIZE = 64
+# min - 8, recommended playable min - 16
+MAP_SIZE = 16
+MAP_SIZE = MAP_SIZE+1 if MAP_SIZE//2 else MAP_SIZE
 
 # player settings
 player_settings = {
-    'position': (WIDTH//2, HEIGHT//2),
+    'position': ((MAP_SIZE*3*TILE)//2-TILE*1.5, (MAP_SIZE*3*TILE)//2+TILE*0.5),
     'angle': 0,
     'speed': 1.3
 }
