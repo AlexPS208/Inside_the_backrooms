@@ -1,7 +1,6 @@
 import pygame
 from math import sin, cos
 from settings import *
-from map import world_map
 
 
 def mapping(a, b):
@@ -9,8 +8,8 @@ def mapping(a, b):
 
 
 def projection_color(depth):
-    hex = 255 / (1+depth**2*0.0001)
-    return (hex, hex // 2, 0)
+    hex = 126 / (1+depth**2*0.0001)
+    return (hex, 0, hex // 2.38)
 
 
 def gradient_rect(window, left_colour, right_colour, target_rect):
@@ -24,7 +23,7 @@ def gradient_rect(window, left_colour, right_colour, target_rect):
     window.blit(colour_rect, target_rect)
 
 
-def ray_casting(screen, player_pos, player_angle):
+def ray_casting(screen, player_pos, player_angle, world_map):
     """ Draw a map walls, which colors depends from depth between player and wall. Need player's position as (x, y) and player's angle of seen"""
 
     # Start datas

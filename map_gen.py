@@ -61,12 +61,17 @@ def map_generate(is_spawn):
     return text_map
 
 
-def map_comparing():
+def map_parts_generate():
     up_map = map_generate(False)
     left_map = map_generate(False)
     center_map = map_generate(True)
     right_map = map_generate(False)
     down_map = map_generate(False)
+    return (up_map, left_map, center_map, right_map, down_map)
+
+
+def map_comparing(map_parts):
+    up_map, left_map, center_map, right_map, down_map = map_parts
 
     empty_map = []
     for row in range(MAP_SIZE):
@@ -80,15 +85,62 @@ def map_comparing():
     for row in range(MAP_SIZE):
         text_map.append(empty_map[row] + down_map[row] + empty_map[row])
 
-    return text_map
+    return (text_map, (up_map, left_map, center_map, right_map, down_map))
 
 
-# create world map
-text_map = map_comparing()
+def up_shift(map_parts):
+    down_map = map_parts[2]
+    center_map = map_parts[0]
+    up_map = map_generate(False)
+    left_map = map_generate(False)
+    right_map = map_generate(False)
 
-# research coords of walls
-world_map = set()
-for j, row in enumerate(text_map):
-    for i, char in enumerate(row):
-        if char == 'W':
-            world_map.add((i*TILE, j*TILE))
+    text_map = map_comparing(
+        (up_map, left_map, center_map, right_map, down_map))[0]
+    return (text_map, (up_map, left_map, center_map, right_map, down_map))
+
+
+def down_shift(map_parts):
+    up_map = map_parts[2]
+    center_map = map_parts[4]
+    down_map = map_generate(False)
+    left_map = map_generate(False)
+    right_map = map_generate(False)
+
+    text_map = map_comparing(
+        (up_map, left_map, center_map, right_map, down_map))[0]
+    return (text_map, (up_map, left_map, center_map, right_map, down_map))
+
+
+def left_shift(map_parts):
+    right_map = map_parts[2]
+    center_map = map_parts[1]
+    down_map = map_generate(False)
+    up_map = map_generate(False)
+    left_map = map_generate(False)
+
+    text_map = map_comparing(
+        (up_map, left_map, center_map, right_map, down_map))[0]
+    return (text_map, (up_map, left_map, center_map, right_map, down_map))
+
+
+def right_shift(map_parts):
+    left_map = map_parts[2]
+    center_map = map_parts[3]
+    down_map = map_generate(False)
+    up_map = map_generate(False)
+    right_map = map_generate(False)
+
+    text_map = map_comparing(
+        (up_map, left_map, center_map, right_map, down_map))[0]
+    return (text_map, (up_map, left_map, center_map, right_map, down_map))
+
+
+def wall_coordinates(text_map):
+    # research coords of walls
+    world_map = set()
+    for j, row in enumerate(text_map):
+        for i, char in enumerate(row):
+            if char == 'W':
+                world_map.add((i*TILE, j*TILE))
+    return world_map

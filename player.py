@@ -1,6 +1,7 @@
 import pygame
 from math import sin, cos
 from settings import *
+from map_gen import up_shift, down_shift, left_shift, right_shift
 
 
 class Player:
@@ -39,3 +40,26 @@ class Player:
         # Press RIGHT
         if keys[pygame.K_RIGHT]:
             self.angle += player_settings['speed']/90
+
+    def escape_room(self, world_map, map_parts):
+        room_up, room_left = MAP_SIZE*TILE, MAP_SIZE*TILE-TILE
+        room_down, room_right = MAP_SIZE*2*TILE, MAP_SIZE*2*TILE-TILE*2
+
+        # Going room up
+        if self.y < room_up:
+            self.y = room_down-1
+            world_map, map_parts = up_shift(map_parts)
+        # Going room down
+        if self.y > room_down:
+            self.y = room_up+1
+            world_map, map_parts = down_shift(map_parts)
+        # Going room left
+        if self.x < room_left:
+            self.x = room_right-1
+            world_map, map_parts = left_shift(map_parts)
+        # Going room right
+        if self.x > room_right:
+            self.x = room_left+1
+            world_map, map_parts = right_shift(map_parts)
+
+        return (world_map, map_parts)

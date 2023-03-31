@@ -2,10 +2,10 @@ import pygame
 from settings import *
 from player import Player
 from drawing import Drawing
+from map_gen import map_comparing, map_parts_generate, wall_coordinates
 
 # import for minimap
 import math
-from map import world_map
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -19,6 +19,10 @@ render = Drawing(screen)
 
 player = Player()
 
+text_map, map_parts = map_comparing(map_parts_generate())
+world_map = wall_coordinates(text_map)
+
+
 while True:
     # Close game loop
     for event in pygame.event.get():
@@ -30,7 +34,10 @@ while True:
 
     # Render
     render.background()
-    render.world(player.pos, player.angle)
+
+    text_map, map_parts = player.escape_room(text_map, map_parts)
+    world_map = wall_coordinates(text_map)
+    render.world(player.pos, player.angle, world_map)
     render.fps(clock)
 
     # mini-map (вырезать потом)

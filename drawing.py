@@ -15,8 +15,8 @@ class Drawing:
         gradient_rect(self.sc, GOLDENROD, BLACK, ceil_rect)
         gradient_rect(self.sc, BLACK, GOLDENROD_LIGHT, floor_rect)
 
-    def world(self, player_pos, player_angle):
-        ray_casting(self.sc, player_pos, player_angle)
+    def world(self, player_pos, player_angle, world_map):
+        ray_casting(self.sc, player_pos, player_angle, world_map)
 
     def fps(self, clock):
         display_fps = "fps: " + str(int(clock.get_fps()))
