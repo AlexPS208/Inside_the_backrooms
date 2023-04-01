@@ -42,24 +42,21 @@ class Player:
             self.angle += player_settings['speed']/90
 
     def escape_room(self, world_map, map_parts):
-        room_up, room_left = MAP_SIZE*TILE, MAP_SIZE*TILE-TILE
-        room_down, room_right = MAP_SIZE*2*TILE, MAP_SIZE*2*TILE-TILE*2
-
         # Going room up
-        if self.y < room_up:
-            self.y = room_down-1
+        if self.y < ROOM_UP:
+            self.y = ROOM_DOWN-1
             world_map, map_parts = up_shift(map_parts)
         # Going room down
-        if self.y > room_down:
-            self.y = room_up+1
+        if self.y > ROOM_DOWN:
+            self.y = ROOM_UP+1
             world_map, map_parts = down_shift(map_parts)
         # Going room left
-        if self.x < room_left:
-            self.x = room_right-1
+        if self.x < ROOM_LEFT:
+            self.x = ROOM_RIGHT-1
             world_map, map_parts = left_shift(map_parts)
         # Going room right
-        if self.x > room_right:
-            self.x = room_left+1
+        if self.x > ROOM_RIGHT:
+            self.x = ROOM_LEFT+1
             world_map, map_parts = right_shift(map_parts)
 
         return (world_map, map_parts)
