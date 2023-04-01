@@ -20,7 +20,7 @@ render = Drawing(screen)
 player = Player()
 
 text_map, map_parts = map_comparing(map_parts_generate())
-world_map = wall_coordinates(text_map)
+world_map, collision_walls = wall_coordinates(text_map)
 
 
 while True:
@@ -30,13 +30,13 @@ while True:
             exit()
 
     # Player control
-    player.move()
+    player.movement(world_map)
 
     # Render
     render.background()
 
     text_map, map_parts = player.escape_room(text_map, map_parts)
-    world_map = wall_coordinates(text_map)
+    world_map, collision_walls = wall_coordinates(text_map)
     render.world(player.pos, player.angle, world_map)
     render.fps(clock)
 

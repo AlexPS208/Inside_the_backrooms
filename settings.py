@@ -20,7 +20,9 @@ ROOM_RIGHT = MAP_SIZE*2*TILE-TILE*2
 player_settings = {
     'position': ((MAP_SIZE*3*TILE)//2-TILE*1.5, (MAP_SIZE*3*TILE)//2+TILE*0.5),
     'angle': 0,
-    'speed': 1.3
+    'speed': 1.3,
+    'sensitivity': 0.004,
+    'side': 5
 }
 
 # render settings
@@ -33,6 +35,7 @@ DIST = NUM_RAYS / (2 * tan(HALF_FOV))
 PROJ_COEF = 0.2 * DIST * TILE
 SCALE = WIDTH // NUM_RAYS
 FPS_POS = (WIDTH-75, 10)
+DOUBLE_PI = pi * 2
 
 # colors
 WHITE = (255, 255, 255)

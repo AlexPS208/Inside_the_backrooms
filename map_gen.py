@@ -1,5 +1,6 @@
 from settings import *
 from random import randint
+import pygame
 
 
 def wall_chance(text_map, row, symbol, is_spawn):
@@ -139,8 +140,10 @@ def right_shift(map_parts):
 def wall_coordinates(text_map):
     # research coords of walls
     world_map = set()
+    collision_walls = []
     for j, row in enumerate(text_map):
         for i, char in enumerate(row):
             if char == 'W':
                 world_map.add((i*TILE, j*TILE))
-    return world_map
+                collision_walls.append(pygame.Rect(i*TILE, j*TILE, TILE, TILE))
+    return (world_map, collision_walls)
